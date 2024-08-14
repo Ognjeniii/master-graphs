@@ -14,7 +14,8 @@ public class RandomGraphs {
 
     public RandomGraphs(int V) {
         this.V = V;
-        E = V * 209;
+        E = V * 5;
+        //E = V * 500;
 
         matrix = new int[V][V];
         list = new HashMap<>(V);
@@ -22,7 +23,7 @@ public class RandomGraphs {
         for (int i = 0; i < V; i++)
             list.put(i, new ArrayList<>());
 
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < E; i++) {
             int u = random.nextInt(V);
             int v = random.nextInt(V);
             int weight = random.nextInt(7) + 3;
@@ -48,6 +49,15 @@ public class RandomGraphs {
 
     public int getV() {
         return V;
+    }
+
+    public int getE() {
+        int count = 0;
+        for (int i = 0; i < list.size(); i++) {
+            count += list.get(i).size();
+        }
+
+        return count;
     }
 
     public int[][] getMatrix() {

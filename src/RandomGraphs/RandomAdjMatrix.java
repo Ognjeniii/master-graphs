@@ -5,7 +5,7 @@ import java.util.Random;
 public class RandomAdjMatrix {
     int V; // broj čvorova
     int E; // broj grana
-    public int[][] graph; // graf
+    int[][] graph; // graf
 
     // pomoću objekta random generišemo nasumične brojeve
     static Random random = new Random();
@@ -16,8 +16,7 @@ public class RandomAdjMatrix {
 
     public RandomAdjMatrix(int V) {
         this.V = V; // postavljane broja čvorova
-        //E = V * ((V - 1) / 2); // postavljanje broja grana
-        E = V * 200;
+        E = V * ((V - 1) / 2); // postavljanje broja grana
         graph = new int[V][V]; // instanciranje polja graf
 
         for(int i = 0; i < E; i++) {

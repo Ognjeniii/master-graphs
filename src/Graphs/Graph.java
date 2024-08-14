@@ -1,4 +1,4 @@
-package Test;
+package Graphs;
 
 public class Graph {
     public int V; // broj čvorova
