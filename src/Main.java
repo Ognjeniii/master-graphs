@@ -1,57 +1,44 @@
+import Algorithms.BellmanFord;
 import Algorithms.Dijkstra;
+import Algorithms.FloydWarshall;
 import Algorithms.Traversals;
 import RandomGraphs.RandomAdjList;
 import RandomGraphs.RandomAdjMatrix;
+import RandomGraphs.RandomGraphs;
 
+import java.sql.SQLOutput;
 import java.util.PriorityQueue;
 
 public class Main {
     public static void main(String[] args) {
-//        int graph[][]
-//                = new int[][] { { 0, 4, 0, 0, 0, 0, 0, 8, 0 },
-//                { 4, 0, 8, 0, 0, 0, 0, 11, 0 },
-//                { 0, 8, 0, 7, 0, 4, 0, 0, 2 },
-//                { 0, 0, 7, 0, 9, 14, 0, 0, 0 },
-//                { 0, 0, 0, 9, 0, 10, 0, 0, 0 },
-//                { 0, 0, 4, 14, 10, 0, 2, 0, 0 },
-//                { 0, 0, 0, 0, 0, 2, 0, 1, 6 },
-//                { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
-//                { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
-//
-//        Dijkstra.dijkstra(graph, 0);
 
-        // 1 sec = 1000 ms
+        int numOfVertices = 5;
 
-        int numOfVertices = 10000;
-//        long start = System.currentTimeMillis();
-//        RandomAdjList ra = new RandomAdjList(numOfVertices);
-//        long elapsedTime = System.currentTimeMillis() - start;
-//
-//        ra.print();
-//
-//        System.out.println("Time used for rg: " + elapsedTime + "ms");
+        RandomGraphs r = new RandomGraphs(numOfVertices);
 
-//        Number of vertices: 3000
-//        Number of edges: 4497000
-//        Time used for rg: 13662ms
+        long startTimed1 = System.currentTimeMillis();
+        int[] resl = Dijkstra.dijkstra(r.getV(), r.getList(), 1);
+        long elapsedTimed1 = System.currentTimeMillis() - startTimed1;
 
-//        long start1 = System.currentTimeMillis();
-//        int src = 5;
-//        int[] res = Dijkstra.dijkstra(numOfVertices, ra.graph, src);
+        long startTimed2 = System.currentTimeMillis();
+        int[] resm = Dijkstra.dijkstra(r.getMatrix(), 1);
+        long elapsedTimed2 = System.currentTimeMillis() - startTimed2;
 
-//        System.out.print("Elements: ");
-//        for(var i : res) {
-//            System.out.print(i + " ");
-//        }
-//
-//        System.out.println();
-//        long elapsedTime1 = System.currentTimeMillis() - start1;
-//
-//        System.out.println("Time used for dijkstra with " + ra.E + " edges: " + elapsedTime1 + "ms");
 
-        long s = System.currentTimeMillis();
-        RandomAdjMatrix am = new RandomAdjMatrix(numOfVertices);
-        long es = System.currentTimeMillis() - s;
-        System.out.println("Time used for creation: " + es + "ms");
+
+        System.out.println("Time amount used for Dijkstra with adjacency list representation: " + elapsedTimed1 + "ms");
+        System.out.println("Time amount used for Dijkstra with adjacency matrix representation: " + elapsedTimed2 + "ms");
+
+        for (int i = 0; i < resl.length; i++) {
+            System.out.println(i + "--->" + resl[i] + "     " + i + "--->" + resm[i]);
+        }
+
+//        RandomAdjList rl = new RandomAdjList(5000);
+//        System.out.println("Broj grana: " + rl.E);
+
+        r.printList();
+        System.out.println();
+        r.printMatrix();
+
     }
 }

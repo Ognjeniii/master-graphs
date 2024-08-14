@@ -2,7 +2,7 @@ package Algorithms;
 
 public class FloydWarshall {
 
-    public int[][] floydWarshall(int[][] graph) {
+    public static int[][] floydWarshall(int[][] graph) {
         int V = graph.length;
         for(int k = 0; k < V; k++) { // među-čvor
             for(int i = 0; i < V; i++) { // redovi - čvor od koga se putuje

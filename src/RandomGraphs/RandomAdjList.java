@@ -62,7 +62,7 @@ public class RandomAdjList {
     //================================================================================================================
     public RandomAdjList(int V) {
         this.V = V; // postavljanje broja čvorova
-        E = V * 50; // postavljanje broja grana
+        E = V * 500; // postavljanje broja grana
         //this.E = V * 3;
 
         graph = new HashMap<>(V);

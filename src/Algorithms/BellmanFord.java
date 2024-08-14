@@ -6,7 +6,7 @@ import java.util.*;
 
 public class BellmanFord {
 
-    public int[] bellmanFord(Map<Integer, List<Node>> graph, int s) {
+    public static int[] bellmanFord(Map<Integer, List<Node>> graph, int s) {
         int V = graph.size();
 
         int[] dist = new int[V]; // udaljenosti od početnog čvora
