@@ -16,16 +16,22 @@ public class RandomAdjMatrix {
 
     public RandomAdjMatrix(int V) {
         this.V = V; // postavljane broja čvorova
-        E = V * ((V - 1) / 2); // postavljanje broja grana
+        //E = V * 500; // postavljanje broja grana
+        //E = V * 5;
         graph = new int[V][V]; // instanciranje polja graf
 
-        for(int i = 0; i < E; i++) {
+        //int e = V * 5;
+        int e = V * 500;
+
+        for(int i = 0; i < e; i++) {
             int u = random.nextInt(V); // generisanje izvornog čvora
             int v = random.nextInt(V); // generisanje čvora do koga se putuje
             int weight = random.nextInt(9) + 1; // generisanje težine grane
 
-            if(graph[u][v] == 0)
+            if(graph[u][v] == 0) {
                 graph[u][v] = weight; // dodavanje grane
+                E++;
+            }
         }
     }
 
@@ -36,5 +42,17 @@ public class RandomAdjMatrix {
             }
             System.out.println();
         }
+    }
+
+    public int[][] getGraph() {
+        return graph;
+    }
+
+    public int getE() {
+        return E;
+    }
+
+    public int getV() {
+        return V;
     }
 }
