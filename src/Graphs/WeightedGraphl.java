@@ -37,4 +37,8 @@ public class WeightedGraphl {
             System.out.println();
         }
     }
+
+    public Map<Integer, List<Node>> getGraph() {
+        return g;
+    }
 }

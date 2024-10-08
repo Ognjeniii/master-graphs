@@ -1,7 +1,8 @@
 package Helper;
 
 public class Node {
-    int vertex, weight;
+    int vertex;
+    int weight;
 
     public Node(int v, int w)
     {

@@ -8,7 +8,6 @@ public class BellmanFord {
 
     public static int[] bellmanFord(Map<Integer, List<Node>> graph, int s) {
         int V = graph.size();
-
         int[] dist = new int[V]; // udaljenosti od početnog čvora
         Arrays.fill(dist, Integer.MAX_VALUE); // punimo ih sa beskonačno, jer su nam vrednosti nepoznate
         dist[s] = 0; // početni čvor na 0
@@ -34,7 +33,6 @@ public class BellmanFord {
                     int weight = node.getWeight();
                     if(dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v])
                         dist[u] = Integer.MIN_VALUE;
-                    return dist;
                 }
             }
         }

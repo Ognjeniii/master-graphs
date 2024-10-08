@@ -8,29 +8,31 @@ public class RandomAdjMatrix {
     int[][] graph; // graf
 
     // pomoću objekta random generišemo nasumične brojeve
-    static Random random = new Random();
+    private static Random random = new Random();
 
     public RandomAdjMatrix() {
 
     }
 
-    public RandomAdjMatrix(int V) {
+    public RandomAdjMatrix(int V, double num) {
         this.V = V; // postavljane broja čvorova
-        //E = V * 500; // postavljanje broja grana
-        //E = V * 5;
+        long e = Math.round((V * (V - 1) / 2) * num);
+        E = (int)e;
+
         graph = new int[V][V]; // instanciranje polja graf
 
-        //int e = V * 5;
-        int e = V * 500;
+        int counter = 0;
+        while (true) {
+            if (counter == E)
+                break;
 
-        for(int i = 0; i < e; i++) {
             int u = random.nextInt(V); // generisanje izvornog čvora
             int v = random.nextInt(V); // generisanje čvora do koga se putuje
-            int weight = random.nextInt(9) + 1; // generisanje težine grane
 
             if(graph[u][v] == 0) {
+                int weight = random.nextInt(9) + 1; // generisanje težine grane
                 graph[u][v] = weight; // dodavanje grane
-                E++;
+                counter++;
             }
         }
     }
