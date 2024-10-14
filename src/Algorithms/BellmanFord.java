@@ -38,4 +38,39 @@ public class BellmanFord {
         }
         return dist;
     }
+
+    // bf optimized
+    public static int[] bellmanFord(int V, List<Node>[] graph, int s) {
+        int[] dist = new int[V];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[s] = 0;
+
+        for(int i = 0; i < V - 1; i++) {
+            boolean updated = false;
+            for(int u = 0; u < V; u++) {
+                for(Node node : graph[u]) {
+                    int v = node.getVertex();
+                    int weight = node.getWeight();
+                    if(dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v]) {
+                        dist[v] = dist[u] + weight;
+                        updated = true;
+                    }
+                }
+            }
+            if(!updated) break;
+        }
+
+        // Detekcija negativnih ciklusa
+        for(int u = 0; u < V; u++) {
+            for(Node node : graph[u]) {
+                int v = node.getVertex();
+                int weight = node.getWeight();
+                if(dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v]) {
+                    dist[v] = Integer.MIN_VALUE;
+                }
+            }
+        }
+
+        return dist;
+    }
 }
