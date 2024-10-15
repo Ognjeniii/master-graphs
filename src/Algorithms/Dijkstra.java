@@ -71,4 +71,38 @@ public class Dijkstra {
 
         return minIndex; // vraćamo sledeći čvor za ažuriranje
     }
+
+    public static int[] dijkstraOptimized(int V, List<Node>[] graph, int src) {
+        int[] distance = new int[V]; // niz koji predstavlja dužine puteva od početnog čvora
+        Arrays.fill(distance, Integer.MAX_VALUE); // postavljamo sve vrednosti na beskonačno
+        distance[src] = 0; // početno teme na 0
+
+        // kreiranje prioritog reda - prioritet imaju čvorovi sa manjom vrednošću distance
+        PriorityQueue<Node> pq = new PriorityQueue<>((v1, v2) -> v1.getWeight() - v2.getWeight());
+        pq.add(new Node(src, 0)); // dodaje se početno teme
+
+        boolean[] visited = new boolean[V]; // praćenje posećenih čvorova
+
+        while (!pq.isEmpty()) {
+            Node curr = pq.poll(); // uzima se čvor sa najmanjom težinom grane
+            int u = curr.getVertex(); // tekući čvor
+
+            if (visited[u]) continue; // ako je već posećen, preskoči ga
+            visited[u] = true; // označi čvor kao posećen
+
+            // prolazak kroz susedne čvorove tekućeg čvora
+            for (Node neighbor : graph[u]) {
+                int v = neighbor.getVertex(); // susedni čvor
+                int weight = neighbor.getWeight(); // težina ivice između u i v
+
+                // relaksacija: ako je kraći put pronađen do susednog čvora
+                if (distance[u] + weight < distance[v]) {
+                    distance[v] = distance[u] + weight;
+                    pq.add(new Node(v, distance[v])); // dodaj susedni čvor u pq sa novom težinom
+                }
+            }
+        }
+
+        return distance; // vraćamo niz udaljenosti
+    }
 }
