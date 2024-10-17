@@ -6,16 +6,16 @@ import java.util.*;
 
 public class Dijkstra {
 
-    public static int[] dijkstra(int V, Map<Integer, List<Node>> g, int src) {
-        int[] distance = new int[V]; // niz koji predstavlja dužine puteva od početnog čvora
+    public static double[] dijkstra(int V, Map<Integer, List<Node>> g, int src) {
+        double[] distance = new double[V]; // niz koji predstavlja dužine puteva od početnog čvora
 
         for(int i = 0; i < V; i++) {
-            distance[i] = Integer.MAX_VALUE; // postavljamo sve vrednosti na beskonačno
+            distance[i] = Double.POSITIVE_INFINITY; // postavljamo sve vrednosti na beskonačno
         }
         distance[src] = 0; // početno teme na 0
 
         // kreiranje prioritog reda - prioritet imaju grane sa manjom vrednošću
-        PriorityQueue<Node> pq = new PriorityQueue<>((v1, v2) -> v1.getWeight() - v2.getWeight());
+        PriorityQueue<Node> pq = new PriorityQueue<>((v1, v2) -> (int) (v1.getWeight() - v2.getWeight()));
         pq.add(new Node(src, 0)); // dodaje se početno teme
 
         while(pq.size() > 0) {
@@ -33,12 +33,12 @@ public class Dijkstra {
         return distance; // vraćamo niz udaljenosti
     }
 
-    public static int[] dijkstra(int[][] graph, int src) {
+    public static double[] dijkstra(int[][] graph, int src) {
         int V = graph.length;
-        int[] dist = new int[V]; // ovo će biti rezultat - udaljenosti od početnog temena
+        double[] dist = new double[V]; // ovo će biti rezultat - udaljenosti od početnog temena
 
         boolean[] sptSet = new boolean[V]; // pomoću ovog niza ćemo voditi evidenciju o posećenim čvorovima
-        Arrays.fill(dist, Integer.MAX_VALUE); // postavljamo udaljenosti na beskonačne vrednosti
+        Arrays.fill(dist, Double.POSITIVE_INFINITY); // postavljamo udaljenosti na beskonačne vrednosti
 
         dist[src] = 0; // udaljenost od početnog temena do početnog temena je 0
 
@@ -57,8 +57,8 @@ public class Dijkstra {
         return dist;
     }
 
-    static int minDistance(int[] dist, boolean[] sptSet, int V) {
-        int min = Integer.MAX_VALUE;
+    static int minDistance(double[] dist, boolean[] sptSet, int V) {
+        double min = Double.POSITIVE_INFINITY;
         int minIndex = -1;
 
         for(int i = 0; i < V; i++) {
@@ -72,13 +72,13 @@ public class Dijkstra {
         return minIndex; // vraćamo sledeći čvor za ažuriranje
     }
 
-    public static int[] dijkstraOptimized(int V, List<Node>[] graph, int src) {
-        int[] distance = new int[V]; // niz koji predstavlja dužine puteva od početnog čvora
+    public static double[] dijkstraOptimized(int V, List<Node>[] graph, int src) {
+        double[] distance = new double[V]; // niz koji predstavlja dužine puteva od početnog čvora
         Arrays.fill(distance, Integer.MAX_VALUE); // postavljamo sve vrednosti na beskonačno
         distance[src] = 0; // početno teme na 0
 
         // kreiranje prioritog reda - prioritet imaju čvorovi sa manjom vrednošću distance
-        PriorityQueue<Node> pq = new PriorityQueue<>((v1, v2) -> v1.getWeight() - v2.getWeight());
+        PriorityQueue<Node> pq = new PriorityQueue<>((v1, v2) -> (int) (v1.getWeight() - v2.getWeight()));
         pq.add(new Node(src, 0)); // dodaje se početno teme
 
         boolean[] visited = new boolean[V]; // praćenje posećenih čvorova
@@ -93,7 +93,7 @@ public class Dijkstra {
             // prolazak kroz susedne čvorove tekućeg čvora
             for (Node neighbor : graph[u]) {
                 int v = neighbor.getVertex(); // susedni čvor
-                int weight = neighbor.getWeight(); // težina ivice između u i v
+                double weight = neighbor.getWeight(); // težina ivice između u i v
 
                 // relaksacija: ako je kraći put pronađen do susednog čvora
                 if (distance[u] + weight < distance[v]) {

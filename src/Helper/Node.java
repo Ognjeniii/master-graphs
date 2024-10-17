@@ -2,15 +2,15 @@ package Helper;
 
 public class Node {
     int vertex;
-    int weight;
+    double weight;
 
-    public Node(int v, int w)
+    public Node(int v, double w)
     {
         vertex = v;
         weight = w;
     }
     public int getVertex() { return vertex; }
-    public int getWeight() { return weight; }
+    public double getWeight() { return weight; }
 
     @Override
     public String toString() {
